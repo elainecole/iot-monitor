@@ -1,0 +1,45 @@
+#!/usr/bin/expect
+set username [lindex $argv 0];
+
+set oldpass [lindex $argv 1];
+set newpass [lindex $argv 2];
+set host    [lindex $argv 3];
+
+spawn ssh -l $username $host
+
+expect {
+    "(yes/no)?"{
+        send "yes\r"
+        exp_continue
+    }
+    "Password:" {
+        send "$oldpass\r"
+        expect "$ "
+        sleep 1
+        send "passwd\r"
+        expect "password:"
+        send "$oldpass\r"
+        expect "Enter new expert password:"
+        send "$newpass\r"
+        expect "Enter new expert password (again):"
+        send "$newpass\r"
+        expect eof"
+        expect "$ "
+        send "exit\n"
+    }
+
+}
+expect "Password:"
+send "$oldpass\r"
+expect "$ "
+sleep 1
+send "passwd\r"
+expect "password:"
+send "$oldpass\r"
+expect "Enter new expert password:"
+send "$newpass\r"
+expect "Enter new expert password (again):"
+send "$newpass\r"
+expect eof"
+expect "$ "
+send "exit\n"

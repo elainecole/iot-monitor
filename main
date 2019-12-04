@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+read -p "Would you like to check your network for vulnerable devices (Y/n):"  ans
+case $ans in
+	Y)
+		./whiteWorm.sh ;#First script to find vulnerable IPs
+		ncrack -oN output.txt -U username.txt -P password.txt -iL ip_vulnerable.txt -p 22;
+		cat output.txt | grep "ssh:" | cut -d " " -f1,4,5 | tr -d "'" > crackedCreds.txt;
+		[ -s crackedCreds.txt ]
+		if [ $? == 0 ]
+		then
+            echo "call securecred"
+			./secureCreds.sh crackedCreds.txt #Second script to change passwords
+		else
+			echo "You have no vulnerable devices"
+		fi
+		;;
+	n)
+		echo "Have a good day!"
+		;;
+esac
+
+# clean up
+rm crackedCreds.txt 2>/dev/null
+rm ip_vulnerable.txt 2>/dev/null
+
+
+
+

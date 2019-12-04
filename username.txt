@@ -1,0 +1,10 @@
+admin
+user
+root
+test
+12345
+123456
+administrator
+shell
+honey
+security
