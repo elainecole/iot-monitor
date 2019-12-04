@@ -2,8 +2,9 @@ import time
 import re
 import sys
 import json
-import os.path
+import os
 from os import path
+
 if path.exists('suspects.json'):
     with open ('suspects.json','r') as f:
         suspectlist=json.load(f)
@@ -33,21 +34,25 @@ if __name__ == "__main__":
      lines = follow(log)
      lines = (line for line in lines if "sshd" in line)
      for line in lines:
-
+        
          if "Failed" in line:
             print("failed login detected")
             ip=re.findall(r'[0-9]+(?:\.[0-9]+){3}',line)
-
+            
             if ip[0] in suspectlist:
                 suspectlist[ip[0]]=suspectlist[ip[0]]+1
                 if (ip[0] in blacklist):
                     pass
                 elif(suspectlist[ip[0]]>2):
                     blacklist.append(ip[0])
-                    
+                    with open ('/etc/hosts.deny','a') as f:
+                        f.write('\n')
+                        f.write('sshd:')
+                        f.write(ip[0])
+                        f.write('\n')
                 else:
                     pass
-
+            
             else:
                 suspectlist[ip[0]]=0
             print(suspectlist)
@@ -57,7 +62,7 @@ if __name__ == "__main__":
             print('blacklist:')
             print(blacklist)
             print('#################################')
-
+            
             json1 =json.dumps(suspectlist)
             f=open("suspects.json","w")
             f.write(json1)
@@ -70,7 +75,7 @@ if __name__ == "__main__":
          if "Accepted" in line:
             print("success login detected:")
             ip=re.findall(r'[0-9]+(?:\.[0-9]+){3}',line)
-
+            
             if ip[0] in blacklist:
                 print("Alarm!!")
             else:
