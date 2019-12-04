@@ -1,5 +1,13 @@
 #!/bin/bash
 
+command -v ncrack >/dev/null 2>&1 || { 
+    echo "*********";
+    echo -e >&2 " ncrack not installed.";
+    echo "*********";
+    echo "sudo apt-get install ncrack" ;
+    echo "--------------------"
+    exit 1; 
+}
 
 read -p "Would you like to check your network for vulnerable devices (Y/n):"  ans
 case $ans in
