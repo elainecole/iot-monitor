@@ -50,7 +50,8 @@ do
                         read -sp 'Password: ' passvar;
                         echo " ";
                         ./ssh_change $username $old_pass $passvar $hostip >/dev/null
-                        break ;;
+                        echo -e "${GREEN} password changed! ${NC}";	
+			break ;;
                     'n') 
                         echo ".";
                         echo ".";

@@ -59,12 +59,12 @@ if __name__ == "__main__":
                         pass
 
                     #TODO: Remove blacklist so we don't have to run as root
-                    blacklist.append(ip[0])
-                    with open ('/etc/hosts.deny','a') as f:
-                        f.write('\n')
-                        f.write('sshd:')
-                        f.write(ip[0])
-                        f.write('\n')
+                   # blacklist.append(ip[0])
+                    #with open ('/etc/hosts.deny','a') as f:
+                     #   f.write('\n')
+                      #  f.write('sshd:')
+                       # f.write(ip[0])
+                        #f.write('\n')
                 else:
                     pass
             

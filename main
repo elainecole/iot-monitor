@@ -1,4 +1,5 @@
 #!/bin/bash
+
 command -v ncrack >/dev/null 2>&1 || { 
     echo "*********";
     echo -e >&2 " ncrack not installed.";
@@ -7,6 +8,9 @@ command -v ncrack >/dev/null 2>&1 || {
     echo "--------------------"
     exit 1; 
 }
+
+read -sp 'Password: ' passvar;
+echo "====================="
 
 rm nohup.out 2>/dev/null
 read -p "Would you like to check your network for vulnerable devices (Y/n):"  ans
@@ -35,8 +39,16 @@ rm ip_vulnerable.txt 2>/dev/null
 #run honey pot here
 #add /usr/bin/python3 to top of script
 #chmod +x 
-nohup ./test.py &
-rm nohup.out 2>/dev/null
+
+#run for demo
+
+# v3aC^11YtM4J
+
+python3 ssh_check.py $passvar
+
+#run background
+# nohup ./test.py &
+# rm nohup.out 2>/dev/null
 
 
 
