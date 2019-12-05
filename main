@@ -1,5 +1,4 @@
 #!/bin/bash
-
 command -v ncrack >/dev/null 2>&1 || { 
     echo "*********";
     echo -e >&2 " ncrack not installed.";
@@ -9,6 +8,7 @@ command -v ncrack >/dev/null 2>&1 || {
     exit 1; 
 }
 
+rm nohup.out 2>/dev/null
 read -p "Would you like to check your network for vulnerable devices (Y/n):"  ans
 case $ans in
 	Y)
@@ -18,7 +18,6 @@ case $ans in
 		[ -s crackedCreds.txt ]
 		if [ $? == 0 ]
 		then
-            echo "call securecred"
 			./secureCreds.sh crackedCreds.txt #Second script to change passwords
 		else
 			echo "You have no vulnerable devices"
@@ -32,6 +31,13 @@ esac
 # clean up
 rm crackedCreds.txt 2>/dev/null
 rm ip_vulnerable.txt 2>/dev/null
+
+#run honey pot here
+#add /usr/bin/python3 to top of script
+#chmod +x 
+nohup ./test.py &
+rm nohup.out 2>/dev/null
+
 
 
 
