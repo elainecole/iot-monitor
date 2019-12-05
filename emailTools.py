@@ -10,7 +10,7 @@ import ssl
 # Global variables
 password = ""
 sendAddr = "sudormrf569@gmail.com"
-recvAddr = "j.millburg@wustl.edu"
+recvAddrs = ["sudormrf569@gmail.com", "j.millburg@wustl.edu"]
 
 
 # initServer
@@ -22,7 +22,8 @@ def initServer(pw):
         # If here then we good?
         global password
         password = pw
-
+        return True
+    return False
 # send email
 def sendEmail(ipAddr):
     global sendAddr
@@ -39,6 +40,7 @@ def sendEmail(ipAddr):
     with smtplib.SMTP_SSL("smtp.gmail.com") as server:
         server.login(sendAddr, password)
         # Send email
-        server.sendmail(sendAddr, recvAddr, message)
+        server.sendmail(sendAddr, recvAddrs, message)
+        return True
 
     
