@@ -3,7 +3,7 @@
 
 ## structure 
 ```
-/
+  /
   ├── main/                 # main script 
   ├── whiteWorm.sh/         # scans network for open SSH ports
   ├── emailTools.py/        # notification system: emails user
