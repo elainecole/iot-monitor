@@ -34,23 +34,24 @@ do
     old_pass=$(echo $i | cut -d " " -f3)
     hostip=$(echo $i | cut -d " " -f1)
 
-    echo $hostip $own_ip
+    
     if [ $hostip = $own_ip ] ; then
         echo "my ip is in the list"
-        exit 1
+        
     else
         echo "Vunerable Machine : $i"
         echo "Would you like to change the default password of vulnerable devices? "
         while true; do 
             read -p "Y/n :" ans
-            echo $ans
+            #echo $ans
                 case $ans in
                     'Y') 
                         echo "What would you like the new password to be?";
                         read -sp 'Password: ' passvar;
                         echo " ";
                         ./ssh_change $username $old_pass $passvar $hostip >/dev/null
-                        break ;;
+                        echo -e "${GREEN} password changed! ${NC}";	
+			break ;;
                     'n') 
                         echo ".";
                         echo ".";
@@ -62,26 +63,6 @@ do
         done
     fi
 
-    # while true; do 
-    # read -p "Y/n :" ans
-    # echo $ans
-    #     case $ans in
-    #         'Y') 
-    #             echo "What would you like the new password to be?";
-    #             # read -p 'Username: ' uservar
-    #             read -sp 'Password: ' passvar;
-    #             echo " ";
-    #             ./ssh_change $username $old_pass $passvar $hostip
-    #             break ;;
-    #         'n') 
-    #             echo ".";
-    #             echo ".";
-    #             echo ".";
-    #             sleep 1;
-    #             break ;;
-    #         *) echo "Invalid Response";;
-    #     esac
-    # done
 
 
 done

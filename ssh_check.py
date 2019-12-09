@@ -3,7 +3,13 @@ import re
 import sys
 import json
 import os
+import emailTools as e
 from os import path
+
+# Init email
+print(e.initServer(sys.argv[1]))
+
+
 
 if path.exists('suspects.json'):
     with open ('suspects.json','r') as f:
@@ -44,12 +50,21 @@ if __name__ == "__main__":
                 if (ip[0] in blacklist):
                     pass
                 elif(suspectlist[ip[0]]>2):
-                    blacklist.append(ip[0])
-                    with open ('/etc/hosts.deny','a') as f:
-                        f.write('\n')
-                        f.write('sshd:')
-                        f.write(ip[0])
-                        f.write('\n')
+                    #  Send email
+                    if (e.sendEmail(ip[0])):
+                        # Email sent
+                        pass
+                    else:
+                        #TODO: Handle error
+                        pass
+
+                    #TODO: Remove blacklist so we don't have to run as root
+                   # blacklist.append(ip[0])
+                    #with open ('/etc/hosts.deny','a') as f:
+                     #   f.write('\n')
+                      #  f.write('sshd:')
+                       # f.write(ip[0])
+                        #f.write('\n')
                 else:
                     pass
             

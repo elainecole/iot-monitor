@@ -26,13 +26,12 @@ nmap -n -sn ${getip}.1/24
 # touch tmp_ip.txt
 arp -a -n  | grep -v incomplete | awk '{print $2}' | tr -d '()' > tmp
 
-max_ip=$(sort -r tmp | grep -m1 "" | cut -d '.' -f4)
-
-# echo $max_ip
+#max_ip=$(sort -r tmp | grep -m1 "" | cut -d '.' -f4)
+max_ip=$(sort -r -t . -k 3,3n -k 4,4n tmp | tail -n 1 | cut -d '.' -f4)
+#echo $max_ip
 
 echo "-----checking for open port 22-------"
 
-echo " " >/dev/null
 #echo "---PORT 22 ---" >> ip_vulnerable.txt
 result22=$(nmap -PN -p 22 --open -oG - ${getip}.0-$max_ip | awk '$NF~/ssh/{print $2}' )
 echo "$result22" >> ip_vulnerable.txt
