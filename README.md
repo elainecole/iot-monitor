@@ -1,5 +1,16 @@
-# iot-monitor
+# IoT Network Canary Overview (INC) 
 569S Final Project
 
-## ssh_check.py
-Continuously runs in background on honeypot monitoring traffic and keeps track of connection attempts to the device and blacklist IP addresses that are viewed as unauthorized users attempting to access device.
+## structure 
+```
+/
+  ├── main/                 # main script 
+  ├── whiteWorm.sh/         # scans network for open SSH ports
+  ├── emailTools.py/        # notification system: emails user
+  ├── secureCreds.sh/       # prompts user to change default credentials 
+  ├── ssh_change/           # automates process of changing default credentials
+  ├── ssh_check.py/         # checks for brute force SSH connection attempts
+  ├── password.txt/         # list of passwords to use to attempt to connect
+  ├── username.txt/         # list of admins to use to attempt to connect
+
+```
