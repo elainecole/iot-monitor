@@ -40,4 +40,4 @@ To simulate a similar brute force attack on the devices found on the network to 
 The process of prompting the user to change the vulnerable password of the devices, was accomplished using a shell library called ​expect​. It simply “expects” a prompt in which sends the input automatically. IoT Network Canary first asks the user if they would like to change the password of vulnerable devices. Then the ​expect​ script, automatically connects to the vulnerable device through an ssh session with the cracked credentials, and it changes the password. Once done, the script automatically closes the ssh connection. During the whole process, all the output is redirected to ​/dev/null​ so no log is maintained.
 
 Below our diagram outlines the workflow of our IoT Network Canary (INC):
-![Image of Workflow](https://github.com/elainecole/iot-monitor/media/writeup_diagram.png)
+![Image of Workflow](https://github.com/elainecole/iot-monitor/blob/master/media/writeup_diagram.png)
